@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   margin-top: 32px;
@@ -26,53 +26,56 @@ export const Header = styled.header`
 
     &:hover {
       background: ${({ theme }) => theme.colors.primary.main};
-      color: #FFFFFF;
+      color: #ffffff;
     }
   }
 `;
 
 export const InputSearchContainer = styled.div`
+  width: 100%;
+
+  input {
     width: 100%;
+    background: #ffffff;
+    border: none;
+    border-radius: 25px;
+    height: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
+    outline: none;
+    padding: 0 16px;
 
-    input {
-        width: 100%;
-        background: #FFFFFF;
-        border: none;
-        border-radius: 25px;
-        height: 50px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
-        outline: none;
-        padding: 0 16px;
-
-        &::placeholder {
-            color: #BCBCBC;
-        }
+    &::placeholder {
+      color: #bcbcbc;
     }
+  }
 `;
 
-export const ListContainer = styled.div`
+export const ListHeader = styled.header`
   margin-top: 24px;
+  margin-bottom: 8px;
 
-  header {
-    margin-bottom: 8px;
+  button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 
-    button {
-      background: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
+    span {
+      margin-right: 8px;
+      font-weight: bold;
+      color: ${({ theme }) => theme.colors.primary.main};
+    }
 
-      span {
-        margin-right: 8px;
-        font-weight: bold;
-        color: ${({ theme }) => theme.colors.primary.main};
-      }
+    img {
+      transform: ${({ $orderBy }) =>
+        $orderBy === "asc" ? "rotate(180deg)" : "rotate(0deg)"};
+      transition: transform 0.2s ease-in;
     }
   }
 `;
 
 export const Card = styled.div`
-  background: #FFF;
+  background: #fff;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.04);
   padding: 16px;
   border-radius: 4px;
