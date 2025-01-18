@@ -1,5 +1,5 @@
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, useMemo, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 import {
   Card,
@@ -10,26 +10,26 @@ import {
   SearchNotFoundContainer,
   ListHeader,
   InputSearchContainer,
-} from './styles';
+} from "./styles";
 
-import arrow from '../../assets/images/icons/arrow.svg';
-import edit from '../../assets/images/icons/edit.svg';
-import trash from '../../assets/images/icons/trash.svg';
-import sad from '../../assets/images/sad.svg';
-import emptyBox from '../../assets/images/empty-box.svg';
-import magnifierQuestion from '../../assets/images/magnifier-question.svg';
+import arrow from "../../assets/images/icons/arrow.svg";
+import edit from "../../assets/images/icons/edit.svg";
+import trash from "../../assets/images/icons/trash.svg";
+import sad from "../../assets/images/sad.svg";
+import emptyBox from "../../assets/images/empty-box.svg";
+import magnifierQuestion from "../../assets/images/magnifier-question.svg";
 
-import Loader from '../../components/Loader';
-import Button from '../../components/Button';
+import Loader from "../../components/Loader";
+import Button from "../../components/Button";
 
-import ContactsService from '../../services/ContactsService';
+import ContactsService from "../../services/ContactsService";
 
 export default function Home() {
   const [contacts, setContacts] = useState([]);
-  const [orderBy, setOrderBy] = useState('asc');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [orderBy, setOrderBy] = useState("asc");
+  const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [hasError, setHasError] = useState(false)
+  const [hasError, setHasError] = useState(false);
 
   const filteredContacts = useMemo(
     () =>
@@ -52,14 +52,14 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
-  }, [orderBy])
+  }, [orderBy]);
 
   useEffect(() => {
     loadContacts();
   }, [loadContacts]);
 
   function handleToggleOrderBy() {
-    setOrderBy((prevState) => (prevState === 'asc' ? 'desc' : 'asc'));
+    setOrderBy((prevState) => (prevState === "asc" ? "desc" : "asc"));
   }
 
   function handleChangeSearchTerm(event) {
@@ -85,11 +85,19 @@ export default function Home() {
         </InputSearchContainer>
       )}
 
-      <Header justifyContent={(hasError ? "flex-end" : (contacts.length > 0 ? "space-between" : "center"))}>
-        {(!hasError && contacts.length > 0) && (
+      <Header
+        $justifyContent={
+          hasError
+            ? "flex-end"
+            : contacts.length > 0
+              ? "space-between"
+              : "center"
+        }
+      >
+        {!hasError && contacts.length > 0 && (
           <strong>
             {filteredContacts.length}
-            {filteredContacts.length === 1 ? ' contato' : ' contatos'}
+            {filteredContacts.length === 1 ? " contato" : " contatos"}
           </strong>
         )}
         <Link to="/new">Novo contato</Link>
@@ -100,26 +108,33 @@ export default function Home() {
           <img src={sad} alt="Sad" />
           <div className="details">
             <strong>Ocorreu um erro ao obter os seus contatos!</strong>
-            <Button type='button' onClick={handleTryAgain}>Tentar novamente</Button>
+            <Button type="button" onClick={handleTryAgain}>
+              Tentar novamente
+            </Button>
           </div>
         </ErrorContainer>
       )}
 
       {!hasError && (
         <>
-
-          {(contacts.length < 1 && !isLoading) && (
+          {contacts.length < 1 && !isLoading && (
             <EmptyListContainer>
               <img src={emptyBox} alt="Empty Box" />
-              <p>Você ainda não tem nenhum contato cadastrado!
-                Clique no botão <strong>”Novo contato”</strong> à cima para cadastrar o seu primeiro!</p>
+              <p>
+                Você ainda não tem nenhum contato cadastrado! Clique no botão{" "}
+                <strong>”Novo contato”</strong> à cima para cadastrar o seu
+                primeiro!
+              </p>
             </EmptyListContainer>
           )}
 
-          {(contacts.length > 0 && filteredContacts.length < 1) && (
+          {contacts.length > 0 && filteredContacts.length < 1 && (
             <SearchNotFoundContainer>
               <img src={magnifierQuestion} alt="Magnifier Question" />
-              <span>Nenhum resultado foi encontrado para <strong>{searchTerm}</strong>.</span>
+              <span>
+                Nenhum resultado foi encontrado para{" "}
+                <strong>{searchTerm}</strong>.
+              </span>
             </SearchNotFoundContainer>
           )}
 
@@ -137,7 +152,9 @@ export default function Home() {
               <div className="info">
                 <div className="contact-name">
                   <strong>{contact.name}</strong>
-                  {contact.category_name && <small>{contact.category_name}</small>}
+                  {contact.category_name && (
+                    <small>{contact.category_name}</small>
+                  )}
                 </div>
                 <span>{contact.email}</span>
                 <span>{contact.phone}</span>
