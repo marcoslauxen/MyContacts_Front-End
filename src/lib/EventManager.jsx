@@ -35,16 +35,3 @@ export default class EventManager {
     this.listeners.set(event, filteredListeners);
   }
 }
-
-const toastEventManager = new EventManager();
-
-toastEventManager.on("addtoast", (payload) => {
-  console.log("addtoast listener", payload);
-});
-
-toastEventManager.emit("addtoast", {
-  type: "danger",
-  text: "This is a danger toast",
-});
-
-console.log(toastEventManager);
